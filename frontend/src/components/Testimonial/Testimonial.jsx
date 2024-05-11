@@ -31,7 +31,7 @@ function Testimonial() {
                         <img src={PatientAvatar} alt="" />
                         <div>
                             <h4 className='text-[18px] leading-[30px] font-semibold text-headingColor'>
-                                Mohamed Boukthir
+                                Adel Elbamby 
                             </h4>
                             <div className='flex items-center gap-[2px]'>
                                 <HiStar className='text-yellowColor w-[18px] h-5'/>
@@ -54,7 +54,7 @@ function Testimonial() {
                         <img src={PatientAvatar} alt="" />
                         <div>
                             <h4 className='text-[18px] leading-[30px] font-semibold text-headingColor'>
-                                Mohamed Boukthir
+                            Adel Elbamby 
                             </h4>
                             <div className='flex items-center gap-[2px]'>
                                 <HiStar className='text-yellowColor w-[18px] h-5'/>
@@ -77,7 +77,7 @@ function Testimonial() {
                         <img src={PatientAvatar} alt="" />
                         <div>
                             <h4 className='text-[18px] leading-[30px] font-semibold text-headingColor'>
-                                Mohamed Boukthir
+                            Adel Elbamby 
                             </h4>
                             <div className='flex items-center gap-[2px]'>
                                 <HiStar className='text-yellowColor w-[18px] h-5'/>
@@ -100,7 +100,7 @@ function Testimonial() {
                         <img src={PatientAvatar} alt="" />
                         <div>
                             <h4 className='text-[18px] leading-[30px] font-semibold text-headingColor'>
-                                Mohamed Boukthir
+                            Adel Elbamby 
                             </h4>
                             <div className='flex items-center gap-[2px]'>
                                 <HiStar className='text-yellowColor w-[18px] h-5'/>
@@ -123,7 +123,7 @@ function Testimonial() {
                         <img src={PatientAvatar} alt="" />
                         <div>
                             <h4 className='text-[18px] leading-[30px] font-semibold text-headingColor'>
-                                Mohamed Boukthir
+                            Adel Elbamby 
                             </h4>
                             <div className='flex items-center gap-[2px]'>
                                 <HiStar className='text-yellowColor w-[18px] h-5'/>
@@ -146,7 +146,7 @@ function Testimonial() {
                         <img src={PatientAvatar} alt="" />
                         <div>
                             <h4 className='text-[18px] leading-[30px] font-semibold text-headingColor'>
-                                Mohamed Boukthir
+                            Adel Elbamby 
                             </h4>
                             <div className='flex items-center gap-[2px]'>
                                 <HiStar className='text-yellowColor w-[18px] h-5'/>

@@ -33,4 +33,7 @@ export const doctors = [
     totalPatients: 2200,
     hospital: "MediCare Ortho Center",
   },
+
+ 
+  
 ];
