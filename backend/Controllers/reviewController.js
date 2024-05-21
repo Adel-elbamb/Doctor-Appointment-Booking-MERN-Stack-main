@@ -1,5 +1,6 @@
 import Review from "../models/ReviewSchema.js";
 import Doctor from "../models/DoctorSchema.js";
+// import Boo
 
 export const getAllReviews = async (req, res) => {
   try {

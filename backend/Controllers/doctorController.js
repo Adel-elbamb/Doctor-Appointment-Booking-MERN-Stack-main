@@ -109,3 +109,24 @@ export const getAllDoctor = async (req, res) => {
     });
   }
 };
+
+
+export const getdoctorProfile =   async (req, res) => {
+  const doctorId = req.doctorId;
+  try {
+    const doctor = await Doctor.findById(doctorId);
+    if (!doctor) {
+      return res.status(404).json({ success: false, message: "doctor not found" });
+    }
+    const { password, ...rest } = doctor.doc;
+    const appointments = await Booking.find({doctor : doctorId})
+    console.log(...rest)
+    res.status(200).json({
+      success: true,
+      message: "Profile info is getting",
+      data: { ...rest , appointments },
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Something went wrong, cannot get" });
+  }
+} 
