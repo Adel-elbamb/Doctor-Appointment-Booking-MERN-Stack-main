@@ -9,30 +9,32 @@ const useFetchData = (url) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
+//  console.log(token)
+  
 
-  console.log(token);
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-
       try {
-        const res = await axios.get(url, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        const res = await fetch(url, {
+          headers: { Authorization: `Bearer ${token}` },
         });
-         
-        setData(res.data.data);
+        const result = await res.json();
+        if (!res.ok) {
+          throw new Error(result.message);
+        }
+        // console.log(result)
+        setData(result.data);
         setLoading(false);
-        setError(null);
       } catch (err) {
-        setError(err);
         setLoading(false);
+        setError(err.message);
       }
     };
 
     fetchData();
-  },[url]);
+  }, [url]);
 
   return {
     data,

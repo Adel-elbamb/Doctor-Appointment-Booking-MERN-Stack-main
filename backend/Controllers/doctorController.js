@@ -1,4 +1,5 @@
 import Doctor from "../models/DoctorSchema.js"; // Import the Doctor model
+import Booking from './../models/BookingSchema.js'
 
 export const updateDoctor = async (req, res) => {
   // Rename the function to updateDoctor
@@ -111,22 +112,86 @@ export const getAllDoctor = async (req, res) => {
 };
 
 
-export const getdoctorProfile =   async (req, res) => {
-  const doctorId = req.doctorId;
+// export const getdoctorProfile =   async (req, res) => {
+//   const doctorId = req.userId;
+  
+//   try {
+//     console.log(req.userId)
+//     const doctor = await Doctor.findById({_id : doctorId});
+//     if (!doctor) {
+//       return res.status(404).json({ success: false, message: "doctor not found" });
+//     }
+//     console.log(doctor.doc)
+//     const { password, ...rest } = doctor.doc;
+//     const appointments = await Booking.find({doctor : doctorId})
+//     console.log(...rest)
+//     res.status(200).json({
+//       success: true,
+//       message: "Profile info is getting",
+//       data: { ...rest , appointments },
+//     });
+//   } catch (err) {
+//     res.status(500).json({ success: false, message: "Something went wrong, cannot get" });
+//   }
+// } 
+
+
+// export const getdoctorProfile = async (req, res) => {
+//   const _id = req.body 
+
+//   console.log(req.userId)
+//   try {
+//     // console.log(req)
+//     // console.log(`Doctor ID: ${doctorId}`);
+
+//     // Find the doctor by ID
+//     const doctor = await Doctor.findOne({_id});
+//     if (!doctor) {
+//       return res.status(404).json({ success: false, message: "Doctor not found" });
+//     }
+//     return res.json({message : 'done ' , doctor})
+
+//     // Retrieve appointments for the doctor
+//     // const appointments = await Booking.find({ doctor: doctorId });
+
+//     // res.status(200).json({
+//     //   success: true,
+//     //   message: "Profile info retrieved successfully",
+//     //   data: { doctor, appointments },
+//     // });
+//   } catch (err) {
+//     console.error(`Error retrieving doctor profile: ${err.message}`);
+//     res.status(500).json({ success: false, message: "Something went wrong, cannot retrieve profile" });
+//   }
+// };
+
+
+
+export const getdoctorProfile = async (req, res) => {
+  const doctorId = req.userId;  // Assuming `userId` is set by some authentication middleware
+
+  if (!doctorId) {
+    return res.status(400).json({ success: false, message: "doctorId is required" });
+  }
+
   try {
+    // console.log(req.userId);
     const doctor = await Doctor.findById(doctorId);
+    
     if (!doctor) {
-      return res.status(404).json({ success: false, message: "doctor not found" });
+      return res.status(404).json({ success: false, message: "Doctor not found" });
     }
-    const { password, ...rest } = doctor.doc;
-    const appointments = await Booking.find({doctor : doctorId})
-    console.log(...rest)
+
+    const { password, ...rest } = doctor.toObject();  // toObject to strip Mongoose metadata
+    const appointments = await Booking.find({ doctor: doctorId });
+
     res.status(200).json({
       success: true,
-      message: "Profile info is getting",
-      data: { ...rest , appointments },
+      message: "Profile info is retrieved",
+      data: { ...rest, appointments },
     });
   } catch (err) {
-    res.status(500).json({ success: false, message: "Something went wrong, cannot get" });
+    console.error(err);  // Log the error for debugging purposes
+    res.status(500).json({ success: false, message: "Something went wrong, cannot get profile info" });
   }
-} 
+};

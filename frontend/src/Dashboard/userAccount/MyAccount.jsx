@@ -17,15 +17,17 @@ function MyAccount () {
   }
 
   const [tap, setTap] = useState('booking')
-  const {data, loading , error}= userProfileDate(`${BASE_URL}/users/profile/me`)
-  console.log(error , "Eroro")
-  console.log(data , "userDate");
+  const {data : userData, loading , error}= userProfileDate(`${BASE_URL}/users/profile/me`)
+  // console.log(error , "Eroro")
+  // console.log(userData , "userDate");
+
+
 
   return (
     <section>
       <div className='max-w-[1170px] px-5 mx-auto'>
       {loading && <Loading/>} ,
-        {/* {error && <Error errorMassage = {error}/>} */}
+        {error &&  ! loading && (<Error errorMassage ={error}  />)}
        
       {!loading && !error && (<div className='grid md:grid-cols-3 gap-10'>
         <div className='pb-[5@px] px-[30px] rounded-md'>
@@ -33,7 +35,7 @@ function MyAccount () {
           <div className='flex items-center justify-center '>
             <figure className='w-[100px] h-[100px] rounded-full border-2 border-solid border-primaryColor'>
               <img
-                src={userImg}
+                src={!userData ? " " : userData.photo}
                 alt=''
                 className='w-full h-full rounded-full'
               />
@@ -42,15 +44,19 @@ function MyAccount () {
           {/* user data  */}
           <div className='text-center mt-4'>
             <h1 className='text-[18px] leading-[30px] text-headingColor font-bold'>
-              Adel Elbamby
+              {!userData ? " " : userData.name}
+             
             </h1>
-            <p className='text-textColor text-[14px] leading-6 font-medium'>
-              adelelbamby@gmail.com
+            <p className='text-textColor text-[15px] leading-6 font-medium mb-1'>
+            {!userData ? " " : userData.email}
+              
+              
             </p>
             <p className='text-textColor text-[14px] leading-6 font-medium'>
-              Blood :
-              <span className='ml-2  text-heandlingColor text-[22px] leanding-8'>
-                o-
+              Blood Type :
+              <span className='ml-2  text-heandlingColor text-[17px] leanding-8'>
+              {!userData ? " " : userData.bloodType}
+                
               </span>
             </p>
           </div>
@@ -97,7 +103,7 @@ function MyAccount () {
              tap == 'booking' && <Bookings/>
         }
         {
-             tap == 'settings' && <Profile/>
+             tap == 'settings' && <Profile user = {userData}/>
         }
         </div>
 
