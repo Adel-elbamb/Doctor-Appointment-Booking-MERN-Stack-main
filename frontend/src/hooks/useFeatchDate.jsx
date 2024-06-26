@@ -8,7 +8,6 @@ const useFetchData = (url) => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-
 //  console.log(token)
   
 

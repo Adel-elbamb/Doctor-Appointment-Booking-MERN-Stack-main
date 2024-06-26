@@ -30,4 +30,13 @@ const UserSchema = new mongoose.Schema({
   appointments: [{ type: mongoose.Types.ObjectId, ref: "Appointment" }],
 });
 
+
+// UserSchema.pre(/^find/, function (next) {
+//   this.populate('appointments')
+//       .populate('bookings');
+
+//   next();
+// });
+
+
 export default mongoose.model("User", UserSchema);

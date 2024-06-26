@@ -113,7 +113,7 @@ const Home = () => {
               Expert Health Care.</p>
           </div>
 
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-[30px] 
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 lg:gap-[30px] 
           mt-[30px] lg:mt-[55px]'>
 
             <div className='py-[30px] px-5'>
@@ -138,7 +138,7 @@ const Home = () => {
                 </div>
             </div>
 
-            <div className='py-[30px] px-5'>
+             {/* <div className='py-[30px] px-5'>
               <div className='flex items-center justify-center'>
                 <img src={icon02} alt="" />
                 </div>
@@ -158,7 +158,7 @@ const Home = () => {
                     <BsArrowRight className='group-hover:text-white w-6 h-5'/>
                    </Link>
                 </div>
-            </div>
+            </div>  */}
 
             <div className='py-[30px] px-5'>
               <div className='flex items-center justify-center'>

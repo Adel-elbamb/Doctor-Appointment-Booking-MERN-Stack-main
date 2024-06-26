@@ -119,12 +119,15 @@ export const getUserProfile = async (req, res) => {
       return res.status(404).json({ success: false, message: "User not found" });
     }
     const { password, ...rest } = user._doc; // Use toObject() or _doc
+    const appointments = await Booking.find({ user: userId });
+
     // console.log(rest);
     
     res.status(200).json({
       success: true,
       message: "Profile info is retrieved",
-      data: rest,
+      data: { ...rest, appointments },
+
     });
   } catch (err) {
     res.status(500).json({ success: false, message: "Something went wrong, cannot get profile info" });
@@ -136,23 +139,50 @@ export const getUserProfile = async (req, res) => {
 
 
 
+// export const getMyAppointments = async (req, res) => {
+//   try {
+//     // step 1: retrieve appointments from booking for specific user
+//     const bookings = await Booking.find({ user: req.userId });
+    
+//     // step 2: extract doctor ids from appointments
+//     const doctorIds = bookings.map(appointment => appointment.doctorId);
+//     console.log(doctorIds)
+    
+//     // step 3: retrieve doctors details for each doctor id
+//     const doctors = await DoctorSchema.find({ _id: { $in: doctorIds } }).select('-password');
+//     console.log(doctors)
+    
+//     res.status(200).json({ success: true, message: "Appointments are getting", data: doctors });
+//   } catch (err) {
+//     // handle error
+
+//     res.status(500).json({ success: false, message: "Something went wrong, cannot get" });
+
+
+//   }
+// }
+
+
+
+
+
 export const getMyAppointments = async (req, res) => {
   try {
-    // step 1: retrieve appointments from booking for specific user
-    const bookings = await Booking.find({ user: req.userId });
-    
-    // step 2: extract doctor ids from appointments
-    const doctorIds = bookings.map(appointment => appointment.doctorId);
-    
-    // step 3: retrieve doctors details for each doctor id
+    // Step 1: Retrieve appointments from booking for specific user
+    const bookings = await Booking.find({ user: req.userId }).populate('doctor').populate('user');
+
+    // Step 2: Extract doctor ids from appointments
+    const doctorIds = bookings.map(booking => booking.doctor._id);
+    console.log('Doctor IDs:', doctorIds);
+
+    // Step 3: Retrieve doctors details for each doctor id
     const doctors = await DoctorSchema.find({ _id: { $in: doctorIds } }).select('-password');
-    
+    console.log('Doctors:', doctors);
+
     res.status(200).json({ success: true, message: "Appointments are getting", data: doctors });
   } catch (err) {
-    // handle error
-
-    res.status(500).json({ success: false, message: "Something went wrong, cannot get" });
-
-
+    // Handle error
+    res.status(500).json({ success: false, message: "Something went wrong, cannot get appointments" });
   }
-}
+};
+
